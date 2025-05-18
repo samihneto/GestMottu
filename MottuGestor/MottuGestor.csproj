@@ -24,7 +24,7 @@
   <ItemGroup>
     <Folder Include="Domain\Enums\" />
     <Folder Include="Domain\Interfaces\" />
-    <Folder Include="Infrasctructure\Mappings\" />
+    <Folder Include="Infrastructure\Mappings\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

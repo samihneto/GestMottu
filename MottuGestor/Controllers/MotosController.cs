@@ -14,7 +14,6 @@ namespace MottuGestor.Controllers
         {
             _repository = repository;
         }
-
         /// Lista todas as motos cadastradas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Moto>>> GetAll()

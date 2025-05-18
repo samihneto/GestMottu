@@ -1,7 +1,7 @@
 ﻿using GestMottu.API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MottuGestor.Infrasctructure.Context
+namespace MottuGestor.Infrastructure.Context
 {
     public class GestMottuContext : DbContext
     {

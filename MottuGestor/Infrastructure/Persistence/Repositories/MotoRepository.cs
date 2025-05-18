@@ -1,6 +1,5 @@
-﻿using GestMottu.API.Data;
+﻿using MottuGestor.Infrastructure.Context;
 using GestMottu.API.Domain.Entities;
-using global::GestMottu.API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MottuGestor.Infrasctructure.Persistence.Repositories
@@ -21,7 +20,9 @@ namespace MottuGestor.Infrasctructure.Persistence.Repositories
             await _context.Motos.FindAsync(id);
 
         public async Task<IEnumerable<Moto>> GetByModeloAsync(string modelo) =>
-            await _context.Motos.Where(m => m.Modelo.Contains(modelo)).ToListAsync();
+            await _context.Motos
+                .Where(m => m.Modelo.Contains(modelo))
+                .ToListAsync();
 
         public async Task AddAsync(Moto moto)
         {
@@ -46,4 +47,3 @@ namespace MottuGestor.Infrasctructure.Persistence.Repositories
         }
     }
 }
-
