@@ -2,15 +2,13 @@
 
 ## Projeto: API RESTful para Gestão de Motos - Mottu
 
-Este projeto é o 2° Checkpoint da disciplina **Advanced Business Development with .NET** e tem como objetivo desenvolver uma **API RESTful** utilizando **.NET 8** e **banco de dados Oracle**, aplicando os conceitos de **Clean Architecture** e **Domain-Driven Design (DDD)**. O foco é solucionar um desafio real da empresa **Mottu** de forma inicial, pois desenvolveremos melhor a ideia para o Challenge.
-
----
+Este projeto é o 2° Checkpoint da disciplina **Advanced Business Development with .NET** e tem como objetivo desenvolver uma **API RESTful** utilizando **.NET 8** e **banco de dados Oracle**.
 
 ## Integrantes
 
-- Felipe Levy Stephens Fidelix  
-- Jennifer Suzuki  
-- Samir Hage Neto  
+- Felipe Levy Stephens Fidelix - RM556426
+- Jennifer Suzuki  - RM554661
+- Samir Hage Neto - RM557260
 
 ---
 
