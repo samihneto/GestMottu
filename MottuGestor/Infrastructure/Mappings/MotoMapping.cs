@@ -1,4 +1,4 @@
-﻿using GestMottu.API.Domain.Entities;
+﻿using MottuGestor.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MottuGestor.Domain.Entities;

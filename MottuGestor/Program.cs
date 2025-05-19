@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using MottuGestor.Infrastructure.Context;
-using MottuGestor.Infrasctructure.Persistence.Repositories;
+using MottuGestor.Infrastructure.Persistence.Repositories;
 
 namespace GestMottu.API
 {

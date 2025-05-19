@@ -1,8 +1,11 @@
-﻿using MottuGestor.Infrastructure.Context;
-using GestMottu.API.Domain.Entities;
+﻿using MottuGestor.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MottuGestor.Infrastructure.Context;
 
-namespace MottuGestor.Infrasctructure.Persistence.Repositories
+namespace MottuGestor.Infrastructure.Persistence.Repositories
 {
     public class MotoRepository : IMotoRepository
     {

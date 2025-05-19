@@ -1,6 +1,6 @@
-﻿using GestMottu.API.Domain.Entities;
+﻿using MottuGestor.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using MottuGestor.Infrasctructure.Persistence.Repositories;
+using MottuGestor.Infrastructure.Persistence.Repositories;
 
 namespace MottuGestor.Controllers
 {
