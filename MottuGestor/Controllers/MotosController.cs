@@ -14,7 +14,8 @@ namespace MottuGestor.Controllers
         {
             _repository = repository;
         }
-        /// Lista todas as motos cadastradas
+
+        // GET: api/Motos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Moto>>> GetAll()
         {
@@ -22,7 +23,7 @@ namespace MottuGestor.Controllers
             return Ok(motos);
         }
 
-        /// Busca uma moto pelo ID
+        // GET: api/Motos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Moto>> GetById(int id)
         {
@@ -31,7 +32,7 @@ namespace MottuGestor.Controllers
             return Ok(moto);
         }
 
-        /// Busca motos pelo modelo (via query param)
+        // GET: api/Motos/buscar?modelo=Yamaha
         [HttpGet("buscar")]
         public async Task<ActionResult<IEnumerable<Moto>>> GetByModelo([FromQuery] string modelo)
         {
@@ -39,7 +40,7 @@ namespace MottuGestor.Controllers
             return Ok(motos);
         }
 
-        /// Cadastra uma nova moto
+        // POST: api/Motos
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Moto moto)
         {
@@ -48,7 +49,7 @@ namespace MottuGestor.Controllers
             return CreatedAtAction(nameof(GetById), new { id = moto.Id }, moto);
         }
 
-        /// Atualiza os dados de uma moto
+        // PUT: api/Motos/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] Moto moto)
         {
@@ -57,7 +58,7 @@ namespace MottuGestor.Controllers
             return NoContent();
         }
 
-        /// Remove uma moto pelo ID
+        // DELETE: api/Motos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
