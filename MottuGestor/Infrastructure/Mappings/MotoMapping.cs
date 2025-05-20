@@ -1,36 +1,46 @@
-﻿using MottuGestor.Domain.Entities;
+﻿using _2TDSPG.API.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MottuGestor.Domain.Entities;
 
-namespace MottuGestor.Infrastructure.Mappings
+namespace _2TDSPG.API.Infrastructure.Mappings
 {
     public class MotoMapping : IEntityTypeConfiguration<Moto>
     {
         public void Configure(EntityTypeBuilder<Moto> builder)
         {
-            builder.ToTable("MOTO");
+            builder.ToTable("Moto");
 
-            builder.HasKey(m => m.Id);
-
-            builder.Property(m => m.Id)
-                   .HasColumnName("ID")
-                   .IsRequired();
-
-            builder.Property(m => m.Modelo)
-                   .HasColumnName("MODELO")
-                   .HasMaxLength(100)
-                   .IsRequired();
+            builder.HasKey(m => m.MotoId);
 
             builder.Property(m => m.Placa)
-                   .HasColumnName("PLACA")
-                   .HasMaxLength(10)
-                   .IsRequired();
+                .IsRequired()
+                .HasMaxLength(10);
+
+            builder.Property(m => m.Modelo)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(m => m.Marca)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(m => m.RfidTag)
+                .IsRequired();
+
+            builder.Property(m => m.Ano)
+                .IsRequired();
+
+            builder.Property(m => m.DataCadastro)
+                .IsRequired();
+
+            builder.Property(m => m.Problema)
+                .HasMaxLength(200);
+
+            builder.Property(m => m.Localizacao)
+                .HasMaxLength(100);
 
             builder.Property(m => m.Status)
-                   .HasColumnName("STATUS")
-                   .HasConversion<string>()
-                   .IsRequired();
+                .IsRequired();
         }
     }
 }
