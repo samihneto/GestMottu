@@ -62,5 +62,18 @@ namespace MottuGestor.API.Domain.Entities
         {
             Status = novoStatus;
         }
+
+        public void AtualizarDados(string rfidTag, string placa, string modelo, string marca, int ano, string problema, string localizacao)
+        {
+            RfidTag = rfidTag;
+            Placa = placa;
+            Modelo = modelo;
+            Marca = marca;
+            Ano = ano;
+            Problema = problema;
+            Localizacao = localizacao;
+        }
+
+
     }
 }

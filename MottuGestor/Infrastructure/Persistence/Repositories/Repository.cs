@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MottuGestor.API.Domain.Entities;
 using MottuGestor.Infrastructure.Context;
 
 namespace MottuGestor.Infrastructure.Persistence.Repositories
@@ -43,6 +44,22 @@ namespace MottuGestor.Infrastructure.Persistence.Repositories
         {
             await _context.SaveChangesAsync();
         }
-    }
 
+        public Task UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            return Task.CompletedTask;
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+            }
+        }
+
+
+    }
 }

@@ -1,8 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MottuGestor.API.Domain.Entities;
+using MottuGestor.API.Models;
 using MottuGestor.Infrastructure.Persistence.Repositories;
-using MottuGestor.Models;
+using System.Net;
 
 namespace MottuGestor.API.Controllers
 {
@@ -17,6 +17,10 @@ namespace MottuGestor.API.Controllers
             _motoRepository = motoRepository;
         }
 
+        // ============================
+        // [GET] /moto
+        // Retorna todas as motos cadastradas
+        // ============================
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,6 +28,10 @@ namespace MottuGestor.API.Controllers
             return Ok(motos);
         }
 
+        // ============================
+        // [GET] /moto/{id}
+        // Busca uma moto específica por ID
+        // ============================
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -34,6 +42,10 @@ namespace MottuGestor.API.Controllers
             return Ok(moto);
         }
 
+        // ============================
+        // [POST] /moto
+        // Cria uma nova moto
+        // ============================
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] MotoInputModel input)
         {
@@ -59,7 +71,72 @@ namespace MottuGestor.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Erro ao cadastrar moto: {ex.Message}");
+            }
+        }
+
+        // ============================
+        // [PUT] /moto/{id}
+        // Atualiza os dados de uma moto existente
+        // ============================
+        [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] MotoInputModel input)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var motoExistente = await _motoRepository.GetByIdAsync(id);
+            if (motoExistente == null)
+                return NotFound("Moto não encontrada.");
+
+            try
+            {
+                motoExistente.AtualizarDados(
+                    rfidTag: input.RfidTag,
+                    placa: input.Placa,
+                    modelo: input.Modelo,
+                    marca: input.Marca,
+                    ano: input.Ano,
+                    problema: input.Problema,
+                    localizacao: input.Localizacao
+                );
+
+                await _motoRepository.UpdateAsync(motoExistente);
+                await _motoRepository.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao atualizar moto: {ex.Message}");
+            }
+        }
+
+
+        // ============================
+        // [DELETE] /moto/{id}
+        // Remove uma moto pelo ID
+        // ============================
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var moto = await _motoRepository.GetByIdAsync(id);
+            if (moto == null)
+                return NotFound("Moto não encontrada.");
+
+            try
+            {
+                await _motoRepository.DeleteAsync(id);
+                await _motoRepository.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao excluir moto: {ex.Message}");
             }
         }
     }
