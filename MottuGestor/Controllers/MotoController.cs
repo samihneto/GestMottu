@@ -1,67 +1,66 @@
-﻿using MottuGestor.API.Domain.Entities;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using MottuGestor.API.Domain.Entities;
+using MottuGestor.Infrastructure.Persistence.Repositories;
+using MottuGestor.Models;
 
-namespace MottuGestor.API.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class MotoController : ControllerBase
+namespace MottuGestor.API.Controllers
 {
-    private static List<Moto> _motos = new();
-
-    [HttpGet]
-    public IActionResult GetAll()
+    [ApiController]
+    [Route("[controller]")]
+    public class MotoController : ControllerBase
     {
-        return Ok(_motos);
-    }
+        private readonly IRepository<Moto> _motoRepository;
 
-    [HttpGet("{id}")]
-    public IActionResult GetById(Guid id)
-    {
-        var moto = _motos.FirstOrDefault(m => m.MotoId == id);
-        if (moto == null)
-            return NotFound("Moto não encontrada.");
-
-        return Ok(moto);
-    }
-
-    [HttpPost]
-    public IActionResult Create([FromBody] MotoInputModel input)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        try
+        public MotoController(IRepository<Moto> motoRepository)
         {
-            var moto = new Moto(
-                rfidTag: input.RfidTag,
-                placa: input.Placa,
-                modelo: input.Modelo,
-                marca: input.Marca,
-                ano: input.Ano,
-                problema: input.Problema,
-                localizacao: input.Localizacao
-            );
-
-            _motos.Add(moto);
-
-            return CreatedAtAction(nameof(GetById), new { id = moto.MotoId }, moto);
+            _motoRepository = motoRepository;
         }
-        catch (Exception ex)
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            return BadRequest(ex.Message);
+            var motos = await _motoRepository.GetAllAsync();
+            return Ok(motos);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var moto = await _motoRepository.GetByIdAsync(id);
+            if (moto == null)
+                return NotFound("Moto não encontrada.");
+
+            return Ok(moto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] MotoInputModel input)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var moto = new Moto(
+                    rfidTag: input.RfidTag,
+                    placa: input.Placa,
+                    modelo: input.Modelo,
+                    marca: input.Marca,
+                    ano: input.Ano,
+                    problema: input.Problema,
+                    localizacao: input.Localizacao
+                );
+
+                await _motoRepository.AddAsync(moto);
+                await _motoRepository.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetById), new { id = moto.MotoId }, moto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
-}
-
-// Modelo para entrada, separado da entidade
-public class MotoInputModel
-{
-    public required string RfidTag { get; set; }
-    public required string Placa { get; set; }
-    public required string Modelo { get; set; }
-    public required string Marca { get; set; }
-    public required int Ano { get; set; }
-    public required string Problema { get; set; }
-    public required string Localizacao { get; set; }
 }
