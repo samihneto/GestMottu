@@ -7,16 +7,14 @@ namespace _2TDSPG.API.Controllers;
 [Route("[controller]")]
 public class MotoController : ControllerBase
 {
-    private static List<Moto> _motos = new(); // Simulando um "banco" em memória
+    private static List<Moto> _motos = new();
 
-    // GET: /Moto
     [HttpGet]
     public IActionResult GetAll()
     {
         return Ok(_motos);
     }
 
-    // GET: /Moto/{id}
     [HttpGet("{id}")]
     public IActionResult GetById(Guid id)
     {
@@ -27,28 +25,43 @@ public class MotoController : ControllerBase
         return Ok(moto);
     }
 
-    // POST: /Moto
     [HttpPost]
-    public IActionResult Create([FromBody] Moto motoInput)
+    public IActionResult Create([FromBody] MotoInputModel input)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        // Criar nova moto
-        Moto moto = new Moto(motoInput.RfidTag)
+        try
         {
-            MotoId = Guid.NewGuid(),
-            Placa = motoInput.Placa,
-            Modelo = motoInput.Modelo,
-            Marca = motoInput.Marca,
-            Ano = motoInput.Ano,
-            Problema = motoInput.Problema,
-            Localizacao = motoInput.Localizacao,
-            Status = motoInput.Status
-        };
+            var moto = new Moto(
+                rfidTag: input.RfidTag,
+                placa: input.Placa,
+                modelo: input.Modelo,
+                marca: input.Marca,
+                ano: input.Ano,
+                problema: input.Problema,
+                localizacao: input.Localizacao
+            );
 
-        _motos.Add(moto);
+            _motos.Add(moto);
 
-        return CreatedAtAction(nameof(GetById), new { id = moto.MotoId }, moto);
+            return CreatedAtAction(nameof(GetById), new { id = moto.MotoId }, moto);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
+}
+
+// Modelo para entrada, separado da entidade
+public class MotoInputModel
+{
+    public string RfidTag { get; set; }
+    public string Placa { get; set; }
+    public string Modelo { get; set; }
+    public string Marca { get; set; }
+    public int Ano { get; set; }
+    public string Problema { get; set; }
+    public string Localizacao { get; set; }
 }
