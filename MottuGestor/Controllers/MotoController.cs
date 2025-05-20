@@ -1,7 +1,7 @@
-﻿using _2TDSPG.API.Domain.Entity;
+﻿using MottuGestor.API.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace _2TDSPG.API.Controllers;
+namespace MottuGestor.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -57,11 +57,11 @@ public class MotoController : ControllerBase
 // Modelo para entrada, separado da entidade
 public class MotoInputModel
 {
-    public string RfidTag { get; set; }
-    public string Placa { get; set; }
-    public string Modelo { get; set; }
-    public string Marca { get; set; }
-    public int Ano { get; set; }
-    public string Problema { get; set; }
-    public string Localizacao { get; set; }
+    public required string RfidTag { get; set; }
+    public required string Placa { get; set; }
+    public required string Modelo { get; set; }
+    public required string Marca { get; set; }
+    public required int Ano { get; set; }
+    public required string Problema { get; set; }
+    public required string Localizacao { get; set; }
 }

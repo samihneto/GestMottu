@@ -1,8 +1,8 @@
-﻿using _2TDSPG.API.Domain.Entity;
+﻿using MottuGestor.API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace _2TDSPG.API.Infrastructure.Mappings
+namespace MottuGestor.API.Infrastructure.Mappings
 {
     public class MotoMapping : IEntityTypeConfiguration<Moto>
     {

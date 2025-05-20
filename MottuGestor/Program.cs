@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using MottuGestor.Infrastructure.Context;
-using MottuGestor.Infrastructure.Persistence.Repositories;
 
 namespace GestMottu.API
 {
@@ -40,7 +39,6 @@ namespace GestMottu.API
             builder.Services.AddDbContext<GestMottuContext>(options =>
                 options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IMotoRepository, MotoRepository>();
 
             var app = builder.Build();
 

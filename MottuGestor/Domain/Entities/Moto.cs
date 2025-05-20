@@ -1,18 +1,19 @@
-﻿using _2TDSPG.API.Domain.Enums;
+﻿
+using MottuGestor.Domain.Enums;
 
-namespace _2TDSPG.API.Domain.Entity
+namespace MottuGestor.API.Domain.Entities
 {
     public class Moto
     {
         public Guid MotoId { get; private set; }
-        public string Placa { get; private set; }
-        public string Modelo { get; private set; }
-        public string Marca { get; private set; }
-        public string RfidTag { get; private set; }
+        public string Placa { get; private set; } = string.Empty;
+        public string Modelo { get; private set; } = string.Empty;
+        public string Marca { get; private set; } = string.Empty;
+        public string RfidTag { get; private set; } = string.Empty;
         public int Ano { get; private set; }
         public DateTime DataCadastro { get; private set; }
-        public string Problema { get; private set; }
-        public string Localizacao { get; private set; }
+        public string Problema { get; private set; } = string.Empty;
+        public string Localizacao { get; private set; } = string.Empty;
         public StatusMoto Status { get; private set; }
 
         // Construtor que garante que RFID e demais dados sejam fornecidos ao criar
@@ -40,7 +41,11 @@ namespace _2TDSPG.API.Domain.Entity
         }
 
         // Construtor vazio para EF
-        public Moto() { }
+        public Moto()
+        {
+            DataCadastro = DateTime.UtcNow;
+            Status = StatusMoto.Disponivel;
+        }
 
         // Métodos para alterar campos, se quiser controlar modificações:
         public void AtualizarLocalizacao(string novaLocalizacao)
