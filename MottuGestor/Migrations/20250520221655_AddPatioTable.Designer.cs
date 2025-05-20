@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MottuGestor.Infrastructure.Context;
 using Oracle.EntityFrameworkCore.Metadata;
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace MottuGestor.Migrations
 {
     [DbContext(typeof(GestMottuContext))]
-    partial class GestMottuContextModelSnapshot : ModelSnapshot
+    [Migration("20250520221655_AddPatioTable")]
+    partial class AddPatioTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
