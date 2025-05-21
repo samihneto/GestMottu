@@ -1,9 +1,17 @@
-﻿namespace MottuGestor.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MottuGestor.API.Models
 {
     public class UsuarioInputModel
     {
-        public string Nome { get; internal set; }
-        public string Email { get; internal set; }
-        public string SenhaHash { get; internal set; }
+        [Required]
+        public string Nome { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        public string SenhaHash { get; set; } = string.Empty;
     }
 }
