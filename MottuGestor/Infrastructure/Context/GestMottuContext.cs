@@ -11,12 +11,14 @@ namespace MottuGestor.Infrastructure.Context
         }
 
         public DbSet<Moto> Motos { get; set; }
-        public DbSet<Patio> Patios { get; set; } // Novo DbSet
+        public DbSet<Patio> Patios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; } // ✅ Adicionado
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new MotoMapping());
-            modelBuilder.ApplyConfiguration(new PatioMapping()); // Novo mapeamento
+            modelBuilder.ApplyConfiguration(new PatioMapping());
+            modelBuilder.ApplyConfiguration(new UsuarioMapping()); // ✅ Adicionado
 
             base.OnModelCreating(modelBuilder);
         }

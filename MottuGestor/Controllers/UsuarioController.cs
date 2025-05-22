@@ -2,7 +2,6 @@
 using MottuGestor.API.Domain.Entities;
 using MottuGestor.API.Models;
 using MottuGestor.Infrastructure.Persistence.Repositories;
-using MottuGestor.Models;
 using System.Net;
 
 namespace MottuGestor.API.Controllers

@@ -64,9 +64,5 @@ namespace MottuGestor.API.Domain.Entities
             return senhaHash;
         }
 
-        internal void AtualizarSenha(object senhaHash)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
