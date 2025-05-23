@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MottuGestor.API.Domain.Entities;
 using MottuGestor.API.Models;
+using MottuGestor.Domain.Enums;
 using MottuGestor.Infrastructure.Persistence.Repositories;
 using System.Net;
 
@@ -40,6 +41,30 @@ namespace MottuGestor.API.Controllers
                 return NotFound("Moto não encontrada.");
 
             return Ok(moto);
+        }
+
+        // ============================
+        // [GET] /moto/{filtro}
+        // Busca motos por modelo (query)
+        // ============================
+        [HttpGet("filtro")]
+        public async Task<IActionResult> Filtrar(
+    [FromQuery] StatusMoto? status,
+    [FromQuery] string? marca,
+    [FromQuery] int? ano)
+        {
+            var motos = await _motoRepository.GetAllAsync();
+
+            if (status.HasValue)
+                motos = motos.Where(m => m.Status == status).ToList();
+
+            if (!string.IsNullOrEmpty(marca))
+                motos = motos.Where(m => m.Marca.ToLower().Contains(marca.ToLower())).ToList();
+
+            if (ano.HasValue)
+                motos = motos.Where(m => m.Ano == ano).ToList();
+
+            return Ok(motos);
         }
 
         // ============================

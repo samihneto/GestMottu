@@ -36,6 +36,29 @@ namespace MottuGestor.API.Controllers
             return Ok(patio);
         }
 
+        // [GET] /patio/filtro
+        // Filtra pátios por nome, endereço ou capacidade mínima
+        [HttpGet("filtro")]
+        public async Task<IActionResult> Filtrar(
+            [FromQuery] string? nome,
+            [FromQuery] string? endereco,
+            [FromQuery] int? capacidadeMinima)
+        {
+            var patios = await _patioRepository.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+                patios = patios.Where(p => p.Nome.ToLower().Contains(nome.ToLower())).ToList();
+
+            if (!string.IsNullOrWhiteSpace(endereco))
+                patios = patios.Where(p => p.Endereco.ToLower().Contains(endereco.ToLower())).ToList();
+
+            if (capacidadeMinima.HasValue)
+                patios = patios.Where(p => p.Capacidade >= capacidadeMinima).ToList();
+
+            return Ok(patios);
+        }
+
+
         // [POST] /patio
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PatioInputModel input)

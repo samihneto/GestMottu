@@ -1,4 +1,4 @@
-# CP2 - Advanced Business Development with .NET - 2025
+# Challenge - Mottu - Advanced Business Development with .NET  - 2025
 
 ## Projeto: API RESTful para Gestão de Motos - Mottu
 
@@ -56,11 +56,32 @@ Criar uma API que permita a gestão completa das motos da empresa, com funcional
 
 ## Rotas Disponíveis
 
+### Moto
 | Método | Endpoint           | Descrição                       |
 |--------|--------------------|--------------------------------|
-| GET    | /api/motos         | Lista todas as motos            |
-| GET    | /api/motos/{id}    | Consulta moto por ID            |
-| GET    | /api/motos/buscar  | Busca motos por modelo (query) |
-| POST   | /api/motos         | Cadastra nova moto              |
-| PUT    | /api/motos/{id}    | Atualiza dados de uma moto      |
-| DELETE | /api/motos/{id}    | Remove uma moto pel
+| GET    | /api/Moto         | Lista todas as motos                        |
+| GET    | /api/Moto/{id}    | Consulta moto por ID                        |
+| GET    | /api/Moto/filtro  | Busca motos por modelo (query)              |
+| POST   | /api/Moto         | Cadastra nova moto                          |
+| PUT    | /api/Moto/{id}    | Atualiza dados de uma moto                  |
+| DELETE | /api/Moto/{id}    | Remove uma moto pelo ID                     |
+
+### Patio
+| Método | Endpoint           | Descrição                       |
+|--------|--------------------|--------------------------------|
+| GET    | /api/Patio         | Lista todos os pátios cadastrados          |
+| GET    | /api/Patio/{id}    | Retorna os dados de um pátio pelo ID       |
+| GET    | /api/Patio/filtro  | Busca pátios pelo nome informado           |
+| POST   | /api/Patio         | Cadastra um novo pátio                     |
+| PUT    | /api/Patio/{id}    | Atualiza os dados de um pátio existente    |
+| DELETE | /api/Patio/{id}    | Remove um pátio do sistema pelo ID         |
+
+### Usuario
+| Método | Endpoint           | Descrição                       |
+|--------|--------------------|--------------------------------|
+| GET    | /api/Usuario         | Lista todos os usuários cadastrados      |
+| GET    | /api/Usuario/{id}    | Consulta usuário por ID                  |
+| GET    | /api/Usuario/filtro  | Busca usuários por modelo (query)        |
+| POST   | /api/Usuario         | Cadastra novo usuário                    |
+| PUT    | /api/Usuario/{id}    | Atualiza dados de um usuário             |
+| DELETE | /api/Usuario/{id}    | Remove uma usuário pelo ID               |

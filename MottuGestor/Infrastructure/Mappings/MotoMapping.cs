@@ -19,7 +19,7 @@ namespace MottuGestor.API.Infrastructure.Mappings
             builder.Property(m => m.Modelo)
                 .IsRequired()
                 .HasMaxLength(50);
-
+            
             builder.Property(m => m.Marca)
                 .IsRequired()
                 .HasMaxLength(50);

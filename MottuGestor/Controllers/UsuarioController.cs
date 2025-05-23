@@ -17,6 +17,10 @@ namespace MottuGestor.API.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+        // ============================
+        // [GET] /usuario
+        // Retorna todos os usuários cadastrados
+        // ============================
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,6 +28,10 @@ namespace MottuGestor.API.Controllers
             return Ok(usuarios);
         }
 
+        // ============================
+        // [GET] /usuario/{id}
+        // Busca um usuário específico por ID
+        // ============================
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -34,6 +42,39 @@ namespace MottuGestor.API.Controllers
             return Ok(usuario);
         }
 
+        // ============================
+        // [GET] /usuario/filtro
+        // Filtra usuários por nome e email (via query string)
+        // Exemplo: /usuario/filtro?nome=joao&email=teste
+        // ============================
+        [HttpGet("filtro")]
+        public async Task<IActionResult> Filtrar(
+            [FromQuery] string? nome,
+            [FromQuery] string? email)
+        {
+            var usuarios = await _usuarioRepository.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+                usuarios = usuarios.Where(u => u.Nome.ToLower().Contains(nome.ToLower())).ToList();
+
+            if (!string.IsNullOrWhiteSpace(email))
+                usuarios = usuarios.Where(u => u.Email.ToLower().Contains(email.ToLower())).ToList();
+
+            var resultado = usuarios.Select(u => new
+            {
+                u.UsuarioId,
+                u.Nome,
+                u.Email,
+                u.DataCadastro
+            });
+
+            return Ok(resultado);
+        }
+
+        // ============================
+        // [POST] /usuario
+        // Cria um novo usuário
+        // ============================
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UsuarioInputModel input)
         {
@@ -59,6 +100,10 @@ namespace MottuGestor.API.Controllers
             }
         }
 
+        // ============================
+        // [PUT] /usuario/{id}
+        // Atualiza os dados de um usuário existente
+        // ============================
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -90,6 +135,10 @@ namespace MottuGestor.API.Controllers
             }
         }
 
+        // ============================
+        // [DELETE] /usuario/{id}
+        // Remove um usuário pelo ID
+        // ============================
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
