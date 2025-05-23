@@ -56,6 +56,9 @@ Criar uma API que permita a gestão completa das motos da empresa, com funcional
 
 ## Rotas Disponíveis
 
+https://localhost:7293/
+http://localhost:5293/
+
 ### Moto
 | Método | Endpoint           | Descrição                       |
 |--------|--------------------|--------------------------------|
