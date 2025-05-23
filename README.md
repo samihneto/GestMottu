@@ -2,7 +2,7 @@
 
 ## Projeto: API RESTful para Gestão de Motos - Mottu
 
-Este projeto é o 2° Checkpoint da disciplina **Advanced Business Development with .NET** e tem como objetivo desenvolver uma **API RESTful** utilizando **.NET 8** e **banco de dados Oracle**.
+Este projeto para o Challenge, da disciplina **Advanced Business Development with .NET** e tem como objetivo desenvolver uma **API RESTful** utilizando **.NET 8** e **banco de dados Oracle**.
 
 ## Integrantes
 
